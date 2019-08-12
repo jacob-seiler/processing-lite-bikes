@@ -309,8 +309,10 @@ var menu = function() {
     if (page === 0) {
         fill(0, 0, 0);
         textSize(50);
-        textAlign(CENTER, TOP);
-        text("Lite Bikes", 0, 50, 400, 400);
+		textAlign(CENTER, TOP);
+		strokeWeight(0);
+		text("Lite Bikes", 0, 50, 400, 400);
+		strokeWeight(3);
         
         if ((mouseX >= 15 && mouseX <= 85 && mouseY >= 170 && mouseY <= 230)) {
             fill(227, 227, 227);
@@ -382,13 +384,14 @@ var menu = function() {
         rect(205, 280, 150, 70);
         fill(0, 0, 0);
         textSize(25);
-        textAlign(CENTER, BOTTOM);
-        text("Instructions", -80, 285, 400, 400);
-        text("Credits", 77, 285, 400, 400);
+		textAlign(CENTER, TOP);
+		strokeWeight(0);
+        text("Instructions", -78, 300, 400, 400);
+        text("Credits", 80, 300, 400, 400);
     } else if (page === 1) {
         fill(0, 0, 0);
         stroke(0, 0, 0);
-        strokeWeight(1);
+        strokeWeight(0);
         textSize(40);
         textAlign(CENTER, TOP);
         text("Credits", 0,10, 400, 400);
@@ -411,13 +414,13 @@ var menu = function() {
         rect(100, 300, 200, 50);
         fill(0, 0, 0);
         stroke(0, 0, 0);
-        strokeWeight(1);
+        strokeWeight(0);
         textAlign(CENTER, TOP);
-        text("Back", 0, 305, 400, 400);
+        text("Back", 5, 310, 400, 400);
     } else if (page === 2) {
         fill(0, 0, 0);
         stroke(0, 0, 0);
-        strokeWeight(1);
+        strokeWeight(0);
         textSize(40);
         textAlign(CENTER, TOP);
         text("Instructions", 0,10, 400, 400);
@@ -445,7 +448,7 @@ var menu = function() {
         ellipse(350, 220, 30, 30);
         
         stroke(110, 110, 110);
-        strokeWeight(2);
+        strokeWeight(1);
         fill(176, 176, 176);
         rect(335, 155, 30, 30);
         rect(305, 155, 30, 30);
@@ -493,9 +496,9 @@ var menu = function() {
         rect(100, 300, 200, 50);
         fill(0, 0, 0);
         stroke(0, 0, 0);
-        strokeWeight(1);
+        strokeWeight(0);
         textAlign(CENTER, TOP);
-        text("Back", 0, 305, 400, 400);
+        text("Back", 5, 310, 400, 400);
     }
 };
 
@@ -507,13 +510,15 @@ var death = function() {
     textSize(50);
     textAlign(CENTER, TOP);
     if (players >= 2) {
+		strokeWeight(0);
         text("Player " + place_first + " Wins", 0, 10, 400, 400);
         textAlign(LEFT, TOP);
         
         fill(60, 60, 60, 10);
         rect(-10, -10, 420, 420);
         fill(255, 255, 255);
-        stroke(176, 176, 176);
+		stroke(176, 176, 176);
+		strokeWeight(0);
         
         text("1.", 50, 70, 400, 400);
         
@@ -529,7 +534,9 @@ var death = function() {
             text("4.", 50, 250, 400, 400);
         }
     } else {
-        text(timer, 0, 10, 400, 400);
+		strokeWeight(0);
+		text(floor(timer * 100)/100, 0, 10, 400, 400);
+		
         if (timer >= record) {
             text("New Record!", 0, 150, 400, 400);
             record = timer;
@@ -538,15 +545,18 @@ var death = function() {
         }
     }
     
-    textAlign(CENTER, BOTTOM);
     if (mouseX >= 50 && mouseX <= 350 && mouseY >= 325 && mouseY <= 385) {
         fill(227, 227, 227);
     } else {
         fill(201, 201, 201);
-    }
+	}
+	
+	textAlign(LEFT, TOP);
+	strokeWeight(3);
     rect(50, 325, 300, 60);
-    fill(255, 255, 255);
-    text("Play Again", 0, 300, 400, 400);
+	fill(255, 255, 255);
+	strokeWeight(0);
+    text("Play Again", 75, 330, 400, 400);
     
     if (place_first === 1) {
         stroke(180, 25, 25);
@@ -669,16 +679,14 @@ var game = function() {
             ellipse(xP4, yP4, radius * 2, radius * 2);
         }
         
-        fill(0, 0, 0);
-        if (round(countdown) !== 0) {
-            text(floor(countdown), 0, 0, 400, 400);
-        } else {
-            text("0", 0, 0, 400, 400);
-        }
+		fill(0, 0, 0);
+		strokeWeight(0);
+		text(floor(countdown) + 1, 0, 0, 400, 400);
         countdown = countdown - 0.015;
         return;
     } else if (countdown > -1.5) {
-        fill(0, 0, 0);
+		fill(0, 0, 0);
+		strokeWeight(0);
         text("GO", 0, 0, 400, 400);
         countdown = countdown - 0.015;
         timer+=0.015;
@@ -700,7 +708,8 @@ var game = function() {
         }
     } else if (players === 1) {
         timer+=0.015;
-        fill(0, 0, 0);
+		fill(0, 0, 0);
+		strokeWeight(0);
         text(floor(timer) + " seconds", 0, 0, 400, 400);
     }
     
@@ -708,21 +717,21 @@ var game = function() {
         if (!playerIsOut(1)) {
             append(beenTo, xP1 + "|" + yP1 + "|1");
         }
-    }
+	}
     
-    if (keyIsPressed && key.code === 119 && directionP1 !== 0 && directionP1 !== 1) {
+    if (keyIsPressed && keyCode === 119 && directionP1 !== 0 && directionP1 !== 1) {
         directionP1 = 0;
     }
     
-    if (keyIsPressed && key.code === 115 && directionP1 !== 1 && directionP1 !== 0) {
+    if (keyIsPressed && keyCode === 115 && directionP1 !== 1 && directionP1 !== 0) {
         directionP1 = 1;
     }
     
-    if (keyIsPressed && key.code === 100 && directionP1 !== 2 && directionP1 !== 3) {
+    if (keyIsPressed && keyCode === 100 && directionP1 !== 2 && directionP1 !== 3) {
         directionP1 = 2;
     }
     
-    if (keyIsPressed && key.code === 97 && directionP1 !== 2 && directionP1 !== 3) {
+    if (keyIsPressed && keyCode === 97 && directionP1 !== 2 && directionP1 !== 3) {
         directionP1 = 3;
     }
      
@@ -742,19 +751,19 @@ var game = function() {
         }
     }
     
-    if (keyIsPressed && keyCode === UP && directionP2 !== 0 && directionP2 !== 1) {
+    if (keyIsPressed && keyCode === UP_ARROW && directionP2 !== 0 && directionP2 !== 1) {
         directionP2 = 0;
     }
     
-    if (keyIsPressed && keyCode === DOWN && directionP2 !== 1 && directionP2 !== 0) {
+    if (keyIsPressed && keyCode === DOWN_ARROW && directionP2 !== 1 && directionP2 !== 0) {
         directionP2 = 1;
     }
     
-    if (keyIsPressed && keyCode === RIGHT && directionP2 !== 2 && directionP2 !== 3) {
+    if (keyIsPressed && keyCode === RIGHT_ARROW && directionP2 !== 2 && directionP2 !== 3) {
         directionP2 = 2;
     }
     
-    if (keyIsPressed && keyCode === LEFT && directionP2 !== 2 && directionP2 !== 3) {
+    if (keyIsPressed && keyCode === LEFT_ARROW && directionP2 !== 2 && directionP2 !== 3) {
         directionP2 = 3;
     }
      
@@ -774,19 +783,19 @@ var game = function() {
         }
     }
     
-    if (keyIsPressed && key.code === 116 && directionP3 !== 0 && directionP3 !== 1) {
+    if (keyIsPressed && keyCode === 116 && directionP3 !== 0 && directionP3 !== 1) {
         directionP3 = 0;
     }
     
-    if (keyIsPressed && key.code === 103 && directionP3 !== 1 && directionP3 !== 0) {
+    if (keyIsPressed && keyCode === 103 && directionP3 !== 1 && directionP3 !== 0) {
         directionP3 = 1;
     }
     
-    if (keyIsPressed && key.code === 104 && directionP3 !== 2 && directionP3 !== 3) {
+    if (keyIsPressed && keyCode === 104 && directionP3 !== 2 && directionP3 !== 3) {
         directionP3 = 2;
     }
     
-    if (keyIsPressed && key.code === 102 && directionP3 !== 2 && directionP3 !== 3) {
+    if (keyIsPressed && keyCode === 102 && directionP3 !== 2 && directionP3 !== 3) {
         directionP3 = 3;
     }
      
@@ -806,19 +815,19 @@ var game = function() {
         }
     }
     
-    if (keyIsPressed && key.code === 105 && directionP4 !== 0 && directionP4 !== 1) {
+    if (keyIsPressed && keyCode === 105 && directionP4 !== 0 && directionP4 !== 1) {
         directionP4 = 0;
     }
     
-    if (keyIsPressed && key.code === 107 && directionP4 !== 1 && directionP4 !== 0) {
+    if (keyIsPressed && keyCode === 107 && directionP4 !== 1 && directionP4 !== 0) {
         directionP4 = 1;
     }
     
-    if (keyIsPressed && key.code === 108 && directionP4 !== 2 && directionP4 !== 3) {
+    if (keyIsPressed && keyCode === 108 && directionP4 !== 2 && directionP4 !== 3) {
         directionP4 = 2;
     }
     
-    if (keyIsPressed && key.code === 106 && directionP4 !== 2 && directionP4 !== 3) {
+    if (keyIsPressed && keyCode === 106 && directionP4 !== 2 && directionP4 !== 3) {
         directionP4 = 3;
     }
      
